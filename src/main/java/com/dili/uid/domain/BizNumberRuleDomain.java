@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * 由MyBatis Generator工具自动生成
@@ -69,4 +70,23 @@ public interface BizNumberRuleDomain extends BizNumberRule, IBaseDomain {
     String getRange();
 
     void setRange(String range);
+
+    @Column(name = "`create_time`")
+    @FieldDef(label="创建时间")
+    @EditMode(editor = FieldEditor.Datetime, required = true)
+    Date getCreateTime();
+
+    void setCreateTime(Date createTime);
+
+    @Column(name = "`update_time`")
+    @FieldDef(label="修改时间")
+    @EditMode(editor = FieldEditor.Datetime, required = true)
+    Date getUpdateTime();
+
+    void setUpdateTime(Date updateTime);
+
+    @Column(name = "`is_delete`")
+    @FieldDef(label="逻辑删除")
+    Boolean getIsDelete();
+    void setIsDelete(Boolean isDelete);
 }

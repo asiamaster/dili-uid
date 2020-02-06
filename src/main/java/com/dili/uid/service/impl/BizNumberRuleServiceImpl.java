@@ -1,11 +1,17 @@
 package com.dili.uid.service.impl;
 
 import com.dili.ss.base.BaseServiceImpl;
+import com.dili.ss.domain.BaseOutput;
 import com.dili.ss.dto.DTOUtils;
+import com.dili.ss.uid.domain.BizNumber;
+import com.dili.ss.uid.service.BizNumberService;
+import com.dili.ss.uid.util.BizNumberUtils;
+import com.dili.ss.util.DateUtils;
 import com.dili.uid.constants.BizNumberConstant;
 import com.dili.uid.domain.BizNumberRuleDomain;
 import com.dili.uid.mapper.BizNumberRuleMapper;
 import com.dili.uid.service.BizNumberRuleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +20,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BizNumberRuleServiceImpl extends BaseServiceImpl<BizNumberRuleDomain, Long> implements BizNumberRuleService {
+
+    @Autowired
+    private BizNumberService bizNumberService;
 
     public BizNumberRuleMapper getActualDao() {
         return (BizNumberRuleMapper)getDao();
@@ -36,6 +45,18 @@ public class BizNumberRuleServiceImpl extends BaseServiceImpl<BizNumberRuleDomai
     @Override
     public int insertSelective(BizNumberRuleDomain bizNumberRuleDomain) {
         int count = super.insertSelective(bizNumberRuleDomain);
+        BizNumber condition = DTOUtils.newInstance(BizNumber.class);
+        condition.setType(bizNumberRuleDomain.getType());
+        BizNumber bizNumber = bizNumberService.selectOne(condition);
+        //初始化biz_number表数据
+        if(bizNumber == null){
+            bizNumber = DTOUtils.newInstance(BizNumber.class);
+            bizNumber.setType(bizNumberRuleDomain.getType());
+            bizNumber.setValue(BizNumberUtils.getInitBizNumber(DateUtils.format(bizNumberRuleDomain.getDateFormat()), bizNumberRuleDomain.getLength()));
+            bizNumber.setMemo(bizNumberRuleDomain.getName());
+            bizNumber.setVersion(1L);
+            bizNumberService.insertSelective(bizNumber);
+        }
         BizNumberConstant.bizNumberCache.put(bizNumberRuleDomain.getType(), bizNumberRuleDomain);
         return count;
     }
@@ -46,5 +67,20 @@ public class BizNumberRuleServiceImpl extends BaseServiceImpl<BizNumberRuleDomai
         int count = super.delete(key);
         BizNumberConstant.bizNumberCache.remove(type);
         return count;
+    }
+
+    @Override
+    public BaseOutput updateEnable(Long id, Boolean enable) {
+        BizNumberRuleDomain bizNumberRuleDomain = DTOUtils.newInstance(BizNumberRuleDomain.class);
+        bizNumberRuleDomain.setId(id);
+        bizNumberRuleDomain.setIsDelete(enable);
+        getActualDao().updateByPrimaryKeySelective(bizNumberRuleDomain);
+        BizNumberRuleDomain domain = get(id);
+        if(enable){
+            BizNumberConstant.bizNumberCache.put(domain.getType(), domain);
+        }else{
+            BizNumberConstant.bizNumberCache.remove(domain.getType());
+        }
+        return BaseOutput.success();
     }
 }

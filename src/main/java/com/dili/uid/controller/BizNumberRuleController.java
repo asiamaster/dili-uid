@@ -95,4 +95,17 @@ public class BizNumberRuleController {
         bizNumberRuleService.delete(id);
         return BaseOutput.success("删除成功");
     }
+
+    /**
+     * 启/禁用
+     * @param id
+     * @return BaseOutput
+     */
+    @RequestMapping(value="/doEnable.action", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody BaseOutput doEnable(Long id, Boolean enable) {
+        bizNumberRuleService.updateEnable(id, enable);
+        return BaseOutput.success("操作成功");
+    }
+
+
 }

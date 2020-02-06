@@ -1,6 +1,7 @@
 package com.dili.uid.service;
 
 import com.dili.ss.base.BaseService;
+import com.dili.ss.domain.BaseOutput;
 import com.dili.uid.domain.BizNumberRuleDomain;
 
 /**
@@ -14,4 +15,12 @@ public interface BizNumberRuleService extends BaseService<BizNumberRuleDomain, L
      * @return
      */
     BizNumberRuleDomain getByType(String type);
+
+    /**
+     * 启/禁用
+     * @param id
+     * @param enable
+     * @return
+     */
+    BaseOutput updateEnable(Long id, Boolean enable);
 }
