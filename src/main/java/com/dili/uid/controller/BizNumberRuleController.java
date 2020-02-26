@@ -2,7 +2,6 @@ package com.dili.uid.controller;
 
 import com.dili.ss.domain.BaseOutput;
 import com.dili.uid.domain.BizNumberRuleDomain;
-import com.dili.uid.rpc.UidRpc;
 import com.dili.uid.service.BizNumberRuleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -26,8 +25,8 @@ public class BizNumberRuleController {
     @Autowired
     BizNumberRuleService bizNumberRuleService;
 
-    @Autowired
-    UidRpc uidRpc;
+//    @Autowired
+//    UidRpc uidRpc;
     /**
      * 跳转到BizNumberRule页面
      * @param modelMap
@@ -36,7 +35,7 @@ public class BizNumberRuleController {
     @ApiOperation("跳转到BizNumberRule页面")
     @RequestMapping(value="/index.html", method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
-        System.out.println(uidRpc.bizCode("leaseOrder").getData());
+//        System.out.println(uidRpc.bizCode("leaseOrder").getData());
         return "bizNumberRule/index";
     }
 
