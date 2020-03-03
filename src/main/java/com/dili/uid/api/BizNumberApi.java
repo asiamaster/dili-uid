@@ -34,14 +34,4 @@ public class BizNumberApi {
         return BaseOutput.success().setData(bizNumberFunction.getBizNumberByType(type));
     }
 
-    /**
-     * 获取租赁订单号
-     * @return
-     */
-    @RequestMapping(value = "/leaseOrderCode", method = { RequestMethod.GET, RequestMethod.POST})
-    public BaseOutput<String> leaseOrderCode() {
-        return BaseOutput.success().setData(bizNumberFunction.getBizNumberByType("leaseOrder"));
-    }
-
-
 }

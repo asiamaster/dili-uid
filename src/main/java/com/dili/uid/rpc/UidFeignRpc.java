@@ -11,7 +11,7 @@
 // * @date 2020/2/25
 // */
 //@FeignClient(name = "dili-uid")
-//public interface UidRpc {
+//public interface UidFeignRpc {
 //
 //    /**
 //     * 根据业务类型获取业务号
@@ -19,12 +19,6 @@
 //     * @return
 //     */
 //    @RequestMapping(value = "/api/bizNumber", method = RequestMethod.POST)
-//    BaseOutput<String> bizCode(@RequestParam(value = "type") String type);
+//    BaseOutput<String> bizNumber(@RequestParam(value = "type") String type);
 //
-//    /**
-//     * 获取租赁单业务号
-//     * @return
-//     */
-//    @RequestMapping(value = "/api/bizNumber/leaseOrderCode", method = RequestMethod.POST)
-//    BaseOutput<String> leaseOrderCode();
 //}

@@ -26,7 +26,7 @@ public class BizNumberRuleController {
     BizNumberRuleService bizNumberRuleService;
 
 //    @Autowired
-//    UidRpc uidRpc;
+//    UidRestfulRpc uidRestfulRpc;
     /**
      * 跳转到BizNumberRule页面
      * @param modelMap
@@ -35,7 +35,7 @@ public class BizNumberRuleController {
     @ApiOperation("跳转到BizNumberRule页面")
     @RequestMapping(value="/index.html", method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
-//        System.out.println(uidRpc.bizCode("leaseOrder").getData());
+//        System.out.println(uidRestfulRpc.bizNumber("leaseOrder").getData());
         return "bizNumberRule/index";
     }
 
