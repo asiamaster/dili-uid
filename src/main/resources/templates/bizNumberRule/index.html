@@ -126,15 +126,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_dateFormat">日期格式</label>
+                            <label class="col-2 col-form-label text-right" for="_prefix">前缀</label>
                             <div class="col-10">
-                                <input type="text" class="form-control" id="_dateFormat" name="_dateFormat" placeholder="如：yyyyMMdd" required/>
+                                <input type="text" class="form-control" id="_prefix" name="_prefix" placeholder="如：O" minlength="1" maxlength="10"  />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_prefix">前缀</label>
+                            <label class="col-2 col-form-label text-right" for="_dateFormat">日期格式</label>
                             <div class="col-10">
-                                <input type="text" class="form-control" id="_prefix" name="_prefix" placeholder="如：O" minlength="1" maxlength="10"  required/>
+                                <input type="text" class="form-control" id="_dateFormat" name="_dateFormat" value="yyyyMMdd" placeholder="如：yyyyMMdd" required/>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -146,7 +146,7 @@
                         <div class="form-group row">
                             <label class="col-2 col-form-label text-right" for="_range">步长范围</label>
                             <div class="col-10">
-                                <input type="text" name="_range" id="_range" class="form-control" placeholder="如：1" minlength="1" maxlength="5"  required/>
+                                <input type="text" name="_range" id="_range" class="form-control" placeholder="如：1" value="1" minlength="1" maxlength="5"  required/>
                             </div>
                         </div>
                     </form>
