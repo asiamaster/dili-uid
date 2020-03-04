@@ -52,7 +52,8 @@ public class BizNumberRuleServiceImpl extends BaseServiceImpl<BizNumberRuleDomai
         if(bizNumber == null){
             bizNumber = DTOUtils.newInstance(BizNumber.class);
             bizNumber.setType(bizNumberRuleDomain.getType());
-            bizNumber.setValue(BizNumberUtils.getInitBizNumber(DateUtils.format(bizNumberRuleDomain.getDateFormat()), bizNumberRuleDomain.getLength()));
+            String dateStr = bizNumberRuleDomain.getDateFormat() == null ? null : DateUtils.format(bizNumberRuleDomain.getDateFormat());
+            bizNumber.setValue(BizNumberUtils.getInitBizNumber(dateStr, bizNumberRuleDomain.getLength()));
             bizNumber.setMemo(bizNumberRuleDomain.getName());
             bizNumber.setVersion(1L);
             bizNumberService.insertSelective(bizNumber);

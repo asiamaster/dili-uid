@@ -35,7 +35,7 @@ public class BizNumberRuleController {
     @ApiOperation("跳转到BizNumberRule页面")
     @RequestMapping(value="/index.html", method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
-//        System.out.println(uidRestfulRpc.bizNumber("leaseOrder").getData());
+//        System.out.println(uidRestfulRpc.bizNumber("privateCustomer").getData());
         return "bizNumberRule/index";
     }
 
