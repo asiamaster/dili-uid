@@ -114,13 +114,13 @@
                     <form id="_form" method="post" class="form-horizontal" action="">
                         <input name="_id" id="_id" type="hidden">
                         <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_name">名称</label>
+                            <label class="col-2 col-form-label text-right" for="_name">名称<i class="red">*</i></label>
                             <div class="col-10">
                                 <input type="text" class="form-control" id="_name" name="_name" minlength="2" maxlength="20" placeholder="如：订单编号" required/>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_type">编号类型</label>
+                            <label class="col-2 col-form-label text-right" for="_type">编号类型<i class="red">*</i></label>
                             <div class="col-10">
                                 <input type="text" class="form-control" id="_type" name="_type" placeholder="如：Order" minlength="4" maxlength="20" required/>
                             </div>
@@ -138,13 +138,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_length">自增位数</label>
+                            <label class="col-2 col-form-label text-right" for="_length">自增位数<i class="red">*</i></label>
                             <div class="col-10">
                                 <input type="text" class="form-control" id="_length" name="_length" placeholder="如：4" range="[0,10]" required/>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_range">步长范围</label>
+                            <label class="col-2 col-form-label text-right" for="_range">步长范围<i class="red">*</i></label>
                             <div class="col-10">
                                 <input type="text" name="_range" id="_range" class="form-control" placeholder="如：1" value="1" minlength="1" maxlength="5"  required/>
                             </div>
