@@ -38,7 +38,8 @@ public class UidInitializer implements ApplicationListener<ContextRefreshedEvent
             if(bizNumber == null){
                 bizNumber = DTOUtils.newInstance(BizNumber.class);
                 bizNumber.setType(t.getType());
-                bizNumber.setValue(BizNumberUtils.getInitBizNumber(DateUtils.format(t.getDateFormat()), t.getLength()));
+                String dateformat = t.getDateFormat() == null ? null : DateUtils.format(t.getDateFormat());
+                bizNumber.setValue(BizNumberUtils.getInitBizNumber(dateformat, t.getLength()));
                 bizNumber.setMemo(t.getName());
                 bizNumber.setVersion(1L);
                 bizNumberService.insertSelective(bizNumber);
