@@ -38,7 +38,7 @@ public class BizNumberRuleServiceImpl extends BaseServiceImpl<BizNumberRuleDomai
     @Override
     public int updateSelective(BizNumberRuleDomain bizNumberRuleDomain) {
         int count = super.updateSelective(bizNumberRuleDomain);
-        BizNumberConstant.bizNumberCache.put(bizNumberRuleDomain.getType(), bizNumberRuleDomain);
+        BizNumberConstant.bizNumberCache.put(get(bizNumberRuleDomain.getId()).getType(), bizNumberRuleDomain);
         return count;
     }
 
