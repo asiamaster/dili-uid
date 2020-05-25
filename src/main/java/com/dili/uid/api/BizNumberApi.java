@@ -1,13 +1,15 @@
 package com.dili.uid.api;
 
 import com.dili.ss.domain.BaseOutput;
+import com.dili.ss.sid.dto.SnowflakeId;
+import com.dili.ss.sid.service.SnowFlakeIdService;
+import com.dili.ss.sid.util.IdUtils;
 import com.dili.uid.component.BizNumberFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 /**
  * 业务号Api
@@ -25,6 +27,9 @@ public class BizNumberApi {
     @Autowired
     private BizNumberFunction bizNumberFunction;
 
+    @Autowired
+    private SnowFlakeIdService snowFlakeIdService;
+
     /**
      * 获取租赁订单号
      * @return
@@ -32,6 +37,64 @@ public class BizNumberApi {
     @RequestMapping(method = { RequestMethod.GET, RequestMethod.POST})
     public BaseOutput<String> bizCode(@RequestParam("type") String type) {
         return BaseOutput.success().setData(bizNumberFunction.getBizNumberByType(type));
+    }
+
+    /**
+     * 64位雪花算法
+     * @return
+     */
+    @GetMapping("sid64")
+    public BaseOutput<String> sid64() {
+        return BaseOutput.success().setData(snowFlakeIdService.nextId());
+    }
+
+    /**
+     * 53位雪花算法
+     * @return
+     */
+    @GetMapping("sid53")
+    public BaseOutput<String> sid53() {
+        return BaseOutput.success().setData(IdUtils.nextId());
+    }
+
+    /**
+     * sid64解析为SnowflakeId
+     * @param id
+     * @return
+     */
+    @GetMapping("expId64")
+    public BaseOutput<SnowflakeId> expId64(Long id) {
+        return BaseOutput.success().setData(snowFlakeIdService.expId(id));
+    }
+
+    /**
+     * sid53解析为SnowflakeId
+     * @param id
+     * @return
+     */
+    @GetMapping("expId53")
+    public BaseOutput<SnowflakeId> expId53(Long id) {
+        return BaseOutput.success().setData(IdUtils.expId(id));
+    }
+
+    /**
+     * sid64的时间(timeStamp)解析为Date
+     * @param time
+     * @return
+     */
+    @GetMapping("transTime64")
+    public BaseOutput<Date> transTime64(Long time) {
+        return BaseOutput.success().setData(snowFlakeIdService.transTime(time));
+    }
+
+    /**
+     * sid53的时间(timeStamp)解析为Date
+     * @param time
+     * @return
+     */
+    @GetMapping("transTime53")
+    public BaseOutput<Date> transTime53(Long time) {
+        return BaseOutput.success().setData(IdUtils.transTime(time));
     }
 
 }
