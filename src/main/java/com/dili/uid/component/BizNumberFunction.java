@@ -33,10 +33,6 @@ public class BizNumberFunction {
         return BizNumberConstant.bizNumberCache.get(bizNumberType);
     }
 
-    public static void main(String[] args) {
-
-    }
-
     /**
      * 当前日期格式化(时区为GMT+08:00)
      * @param format

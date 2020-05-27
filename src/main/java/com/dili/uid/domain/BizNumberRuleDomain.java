@@ -1,6 +1,7 @@
 package com.dili.uid.domain;
 
 import com.dili.ss.dto.IBaseDomain;
+import com.dili.ss.dto.IMybatisForceParams;
 import com.dili.ss.metadata.FieldEditor;
 import com.dili.ss.metadata.annotation.EditMode;
 import com.dili.ss.metadata.annotation.FieldDef;
@@ -19,7 +20,7 @@ import java.util.Date;
  * This file was generated on 2020-01-21 14:38:55.
  */
 @Table(name = "`biz_number_rule`")
-public interface BizNumberRuleDomain extends BizNumberRule, IBaseDomain {
+public interface BizNumberRuleDomain extends BizNumberRule, IBaseDomain, IMybatisForceParams {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "`id`")

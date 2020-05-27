@@ -52,9 +52,9 @@
             }
             row = rows[0];
         }
-        $('#_type').attr('disabled', true);
-        $('#_dateFormat').attr('disabled', true);
-        $('#_length').attr('disabled', true);
+        $('#_type').attr('readonly', true);
+        $('#_dateFormat').attr('readonly', true);
+        $('#_length').attr('readonly', true);
         _modal.modal('show');
         _modal.find('.modal-title').text('编号规则修改');
         let formData = $.extend({}, row);
@@ -70,7 +70,7 @@
             return;
         }
         bui.loading.show('努力提交中，请稍候。。。');
-        let _formData = bui.util.removeKeyStartWith(_form.serializeObject(), "_");
+        let _formData = bui.util.removeKeyStartWith(_form.serializeObject(true), "_");
         let _url = null;
         //没有id就新增
         if (_formData.id == null || _formData.id == "") {

@@ -43,6 +43,15 @@ public class BizNumberRuleServiceImpl extends BaseServiceImpl<BizNumberRuleDomai
     }
 
     @Override
+    public int updateExactSimple(BizNumberRuleDomain bizNumberRuleDomain) {
+        int count = super.updateExactSimple(bizNumberRuleDomain);
+//        BizNumberRuleDomain dbBizNumberRuleDomain = get(bizNumberRuleDomain.getId());
+//        bizNumberRuleDomain.setType(dbBizNumberRuleDomain.getType());
+        BizNumberConstant.bizNumberCache.put(bizNumberRuleDomain.getType(), bizNumberRuleDomain);
+        return count;
+    }
+
+    @Override
     public int insertSelective(BizNumberRuleDomain bizNumberRuleDomain) {
         int count = super.insertSelective(bizNumberRuleDomain);
         BizNumber condition = DTOUtils.newInstance(BizNumber.class);

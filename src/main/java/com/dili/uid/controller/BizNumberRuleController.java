@@ -80,7 +80,7 @@ public class BizNumberRuleController {
 	})
     @RequestMapping(value="/update.action", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody BaseOutput update(BizNumberRuleDomain bizNumberRuleDomain) {
-        bizNumberRuleService.updateSelective(bizNumberRuleDomain);
+        bizNumberRuleService.updateExactSimple(bizNumberRuleDomain);
         return BaseOutput.success("修改成功");
     }
 
