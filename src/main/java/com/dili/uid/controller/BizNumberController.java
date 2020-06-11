@@ -2,7 +2,6 @@ package com.dili.uid.controller;
 
 import com.dili.ss.uid.domain.BizNumber;
 import com.dili.ss.uid.service.BizNumberService;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,7 +24,6 @@ public class BizNumberController {
      * @param modelMap
      * @return String
      */
-    @ApiOperation("跳转到BizNumber页面")
     @RequestMapping(value="/index.html", method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
         return "bizNumber/index";
