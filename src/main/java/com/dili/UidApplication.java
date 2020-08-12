@@ -7,12 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @EnableTransactionManagement
+@EnableFeignClients(basePackages = {"com.dili.logger.sdk.rpc"})
 @ComponentScan(basePackages = { "com.dili.ss", "com.dili.uid", "com.dili.uap.sdk"})
 @RestfulScan({"com.dili.uid.rpc", "com.dili.uap.sdk.rpc"})
 @MapperScan(basePackages = {"com.dili.uid.mapper", "com.dili.ss.uid.dao", "com.dili.ss.dao", "com.dili.ss.quartz.dao"})
