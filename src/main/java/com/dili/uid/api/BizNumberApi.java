@@ -1,7 +1,5 @@
 package com.dili.uid.api;
 
-import com.alibaba.csp.sentinel.EntryType;
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.dili.ss.domain.BaseOutput;
 import com.dili.ss.sid.dto.SnowflakeId;
 import com.dili.ss.sid.service.SnowFlakeIdService;
@@ -36,7 +34,7 @@ public class BizNumberApi {
      * 获取租赁订单号
      * @return
      */
-    @SentinelResource(value = "dili-uid.bizCode", entryType= EntryType.IN)
+//    @SentinelResource(value = "dili-uid.bizCode", entryType= EntryType.IN)
     @RequestMapping(method = { RequestMethod.GET, RequestMethod.POST})
     public BaseOutput<String> bizCode(@RequestParam("type") String type) {
         return BaseOutput.success().setData(bizNumberFunction.getBizNumberByType(type));
@@ -47,7 +45,7 @@ public class BizNumberApi {
      * @return
      */
     @GetMapping("sid64")
-    @SentinelResource(value = "dili-uid.sid64", entryType= EntryType.IN)
+//    @SentinelResource(value = "dili-uid.sid64", entryType= EntryType.IN)
     public BaseOutput<String> sid64() {
         return BaseOutput.success().setData(snowFlakeIdService.nextId());
     }
@@ -57,7 +55,7 @@ public class BizNumberApi {
      * @return
      */
     @GetMapping("sid53")
-    @SentinelResource(value = "dili-uid.sid53", entryType= EntryType.IN)
+//    @SentinelResource(value = "dili-uid.sid53", entryType= EntryType.IN)
     public BaseOutput<String> sid53() {
         return BaseOutput.success().setData(IdUtils.nextId());
     }
