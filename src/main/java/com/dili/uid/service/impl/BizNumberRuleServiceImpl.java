@@ -76,6 +76,7 @@ public class BizNumberRuleServiceImpl extends BaseServiceImpl<BizNumberRuleDomai
         String type = get(key).getType();
         int count = super.delete(key);
         BizNumberConstant.bizNumberCache.remove(type);
+        bizNumberService.clear(type);
         BizNumber bizNumber = DTOUtils.newInstance(BizNumber.class);
         bizNumber.setType(type);
         bizNumberService.deleteByExample(bizNumber);
