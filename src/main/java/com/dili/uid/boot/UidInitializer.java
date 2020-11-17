@@ -1,13 +1,13 @@
 package com.dili.uid.boot;
 
 import com.dili.ss.dto.DTOUtils;
+import com.dili.ss.uid.constants.BizNumberConstant;
 import com.dili.ss.uid.domain.BizNumber;
+import com.dili.ss.uid.domain.BizNumberRuleDomain;
+import com.dili.ss.uid.service.BizNumberRuleService;
 import com.dili.ss.uid.service.BizNumberService;
 import com.dili.ss.uid.util.BizNumberUtils;
 import com.dili.ss.util.DateUtils;
-import com.dili.uid.constants.BizNumberConstant;
-import com.dili.uid.domain.BizNumberRuleDomain;
-import com.dili.uid.service.BizNumberRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -28,8 +28,9 @@ public class UidInitializer implements ApplicationListener<ContextRefreshedEvent
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
-        List<BizNumberRuleDomain> bizNumberRuleDomains = bizNumberRuleService.list(null);
+        BizNumberRuleDomain bizNumberRuleDomain = DTOUtils.newInstance(BizNumberRuleDomain.class);
+        bizNumberRuleDomain.setIsEnable(true);
+        List<BizNumberRuleDomain> bizNumberRuleDomains = bizNumberRuleService.list(bizNumberRuleDomain);
         bizNumberRuleDomains.stream().forEach(t -> {
             BizNumber condition = DTOUtils.newInstance(BizNumber.class);
             condition.setType(t.getType());
@@ -47,9 +48,6 @@ public class UidInitializer implements ApplicationListener<ContextRefreshedEvent
             //将业务规则加载到内存
             BizNumberConstant.bizNumberCache.put(t.getType(), t);
         });
-
     }
-
-
 
 }

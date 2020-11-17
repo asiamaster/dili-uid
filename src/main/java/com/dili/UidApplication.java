@@ -12,12 +12,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.annotation.MapperScan;
 
+import java.text.DecimalFormat;
+
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableFeignClients(basePackages = {"com.dili.logger.sdk.rpc"})
 @ComponentScan(basePackages = { "com.dili.ss", "com.dili.uid", "com.dili.uap.sdk"})
 @RestfulScan({"com.dili.uid.rpc", "com.dili.uap.sdk.rpc"})
-@MapperScan(basePackages = {"com.dili.uid.mapper", "com.dili.ss.uid.dao", "com.dili.ss.dao", "com.dili.ss.quartz.dao"})
+@MapperScan(basePackages = {"com.dili.uid.mapper", "com.dili.ss.uid.mapper", "com.dili.ss.dao"})
 @DTOScan(value={"com.dili.ss", "com.dili.uid"})
 @EnableDiscoveryClient
 //@EnableFeignClients
@@ -36,7 +38,8 @@ public class UidApplication extends SpringBootServletInitializer implements Comm
 		long maxMemory = Runtime.getRuntime().maxMemory();
 		long totalMemory = Runtime.getRuntime().totalMemory();
 		long freeMemory = Runtime.getRuntime().freeMemory();
-		System.out.println("maxMemory:"+maxMemory+",totalMemory:"+totalMemory+",freeMemory:"+freeMemory);
+		DecimalFormat decimalFormat = new DecimalFormat("#,###");
+		System.out.println("maxMemory:" + decimalFormat.format(maxMemory) + ",totalMemory:" + decimalFormat.format(totalMemory) + ",freeMemory:" + decimalFormat.format(freeMemory));
 		System.out.println("项目启动完成!");
 	}
 }

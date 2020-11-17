@@ -6,7 +6,7 @@ import com.dili.ss.domain.BaseOutput;
 import com.dili.ss.sid.dto.SnowflakeId;
 import com.dili.ss.sid.service.SnowFlakeIdService;
 import com.dili.ss.sid.util.IdUtils;
-import com.dili.uid.component.BizNumberFunction;
+import com.dili.ss.uid.component.BizNumberFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +39,11 @@ public class BizNumberApi {
     @SentinelResource(value = "dili-uid.bizCode", entryType= EntryType.IN)
     @RequestMapping(method = { RequestMethod.GET, RequestMethod.POST})
     public BaseOutput<String> bizCode(@RequestParam("type") String type) {
-        return BaseOutput.success().setData(bizNumberFunction.getBizNumberByType(type));
+        try {
+            return BaseOutput.success().setData(bizNumberFunction.getBizNumberByType(type));
+        } catch (Exception e) {
+            return BaseOutput.failure(e.getMessage());
+        }
     }
 
     /**

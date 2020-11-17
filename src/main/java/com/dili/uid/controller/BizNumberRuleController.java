@@ -1,8 +1,8 @@
 package com.dili.uid.controller;
 
 import com.dili.ss.domain.BaseOutput;
-import com.dili.uid.domain.BizNumberRuleDomain;
-import com.dili.uid.service.BizNumberRuleService;
+import com.dili.ss.uid.domain.BizNumberRuleDomain;
+import com.dili.ss.uid.service.BizNumberRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

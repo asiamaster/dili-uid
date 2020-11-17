@@ -56,24 +56,27 @@
                    data-show-refresh="true" data-show-fullscreen="true" data-show-columns="true" data-detail-view="false">
                 <thead>
                 <tr>
-                    <th data-width-unit="%" data-width="2" data-radio="true"></th>
+                    <th data-width-unit="%" data-width="1" data-radio="true"></th>
                     <th data-width-unit="%" data-width="10" data-field="name" data-sortable="true" data-align="center">
                         名称
                     </th>
-                    <th data-width-unit="%" data-width="10" data-field="type" data-sortable="true" data-align="center">
+                    <th data-width-unit="%" data-width="12" data-field="type" data-sortable="true" data-align="center">
                         业务类型
                     </th>
-                    <th data-width-unit="%" data-width="10" data-field="prefix" data-sortable="true" data-align="center">
+                    <th data-width-unit="%" data-width="8" data-field="prefix" data-sortable="true" data-align="center">
                         前缀
                     </th>
                     <th data-width-unit="%" data-width="10" data-field="dateFormat" data-sortable="true" data-align="center" >
                         日期格式
                     </th>
-                    <th data-width-unit="%" data-width="10" data-field="length" data-sortable="true" data-align="center">
+                    <th data-width-unit="%" data-width="8" data-field="length" data-sortable="true" data-align="center">
                         自增位数
                     </th>
-                    <th data-width-unit="%" data-width="10" data-field="range" data-sortable="true" data-align="center">
-                        步长范围
+                    <th data-width-unit="%" data-width="8" data-field="range" data-sortable="true" data-align="center">
+                        自增范围
+                    </th>
+                    <th data-width-unit="%" data-width="8" data-field="step" data-sortable="true" data-align="center">
+                        步长
                     </th>
                     <th data-width-unit="%" data-width="15" data-field="createTime" data-sortable="true" data-align="center" data-provider="datetimeProvider">
                         创建时间
@@ -81,7 +84,7 @@
                     <th data-width-unit="%" data-width="15" data-field="updateTime" data-sortable="true" data-align="center" data-provider="datetimeProvider">
                         修改时间
                     </th>
-                    <th data-width-unit="%" data-width="10" data-field="isDelete" data-sortable="true" data-align="center" data-provider="enabledStateProvider">
+                    <th data-width-unit="%" data-width="8" data-field="isEnable" data-sortable="true" data-align="center" data-provider="enabledStateProvider">
                         状态
                     </th>
                 </tr>
@@ -92,66 +95,125 @@
 </div>
 
 
-<div class="modal fade" id="_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <!--modal-lg modal-sm(默认) 通过设置mw大小调整宽度（如mw-100） modal-dialog-centered垂直居中-->
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- 标题 -->
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="_form" method="post" class="form-horizontal" action="">
-                        <input name="_id" id="_id" type="hidden">
-                        <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_name">名称<i class="red">*</i></label>
-                            <div class="col-10">
-                                <input type="text" class="form-control" id="_name" name="_name" minlength="2" maxlength="20" placeholder="如：订单编号" required/>
-                            </div>
+<div class="modal fade" id="_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <!--modal-lg modal-sm(默认) 通过设置mw大小调整宽度（如mw-100） modal-dialog-centered垂直居中-->
+    <div class="modal-dialog" style="width: 50%;max-width: 50%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- 标题 -->
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="_form" method="post" class="form-horizontal" action="">
+                    <input name="_id" id="_id" type="hidden">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_name">名称<i class="red">*</i></label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="_name" name="_name" minlength="2" maxlength="20"
+                                   placeholder="如：订单编号" required/>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_type">编号类型<i class="red">*</i></label>
-                            <div class="col-10">
-                                <input type="text" class="form-control" id="_type" name="_type" placeholder="如：Order" minlength="4" maxlength="50" required/>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_type">编号类型<i class="red">*</i></label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="_type" name="_type" placeholder="如：Order" minlength="4"
+                                   maxlength="50" required/>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_prefix">前缀</label>
-                            <div class="col-10">
-                                <input type="text" class="form-control" id="_prefix" name="_prefix" placeholder="如：O" minlength="1" maxlength="20"  />
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_prefix">前缀</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="_prefix" title="修改后下一步长生效" name="_prefix" placeholder="如：O"
+                                   minlength="1" maxlength="20"/>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_dateFormat">日期格式</label>
-                            <div class="col-10">
-                                <input type="text" class="form-control" id="_dateFormat" name="_dateFormat" value="yyyyMMdd" placeholder="如：yyyyMMdd" />
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_dateFormat">日期格式</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="_dateFormat" name="_dateFormat" value="yyyyMMdd"
+                                   placeholder="如：yyyyMMdd"/>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_length">自增位数<i class="red">*</i></label>
-                            <div class="col-10">
-                                <input type="text" class="form-control" id="_length" name="_length" placeholder="如：4" range="[0,10]" required/>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_length">自增位数<i class="red">*</i></label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" title="修改后下一个日期生效" id="_length" name="_length" placeholder="如：4"
+                                   range="[0,10]" required/>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-2 col-form-label text-right" for="_range">步长范围<i class="red">*</i></label>
-                            <div class="col-10">
-                                <input type="text" name="_range" id="_range" class="form-control" placeholder="如：1" value="1" minlength="1" maxlength="5"  required/>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_range">自增范围<i class="red">*</i></label>
+                        <div class="col-10">
+                            <input type="text" name="_range" id="_range" title="修改后下一步长生效" class="form-control" placeholder="如：1" value="1"
+                                   minlength="1" maxlength="5" required/>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" onclick="saveOrUpdateHandler()">提交</button>
-                </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_step">步长<i class="red">*</i></label>
+                        <div class="col-10">
+                            <input type="text" name="_step" id="_step" title="修改后下一步长生效" class="form-control" placeholder="如：50" value="1"
+                                   minlength="1" maxlength="10" required/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="saveOrUpdateHandler()">提交</button>
             </div>
         </div>
     </div>
-
 </div>
+
+
+<div class="modal fade" id="_executeModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="executeModalLabel"
+     aria-hidden="true">
+    <!--modal-lg modal-sm(默认) 通过设置mw大小调整宽度（如mw-100） modal-dialog-centered垂直居中-->
+    <div class="modal-dialog" style="width: 50%;max-width: 50%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- 标题 -->
+                <h5 class="modal-title" id="executeModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="_executeform" method="post" class="form-horizontal" action="">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_executeType">类型<i class="red">*</i></label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="_executeType" name="_executeType" placeholder="如：Order" minlength="4"
+                                   maxlength="50" required/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_currentValue">当前编号<i class="red">*</i></label>
+                        <div class="col-10">
+                            <input type="text" name="_currentValue" id="_currentValue" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right" for="_nextValue">下一编号<i class="red">*</i></label>
+                        <div class="col-10">
+                            <input type="text" name="_nextValue" id="_nextValue" class="form-control" disabled/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="getNextValueHandler()">下一编号</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </#bs4Body>
 <#bnr_indexJs />

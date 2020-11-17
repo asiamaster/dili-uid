@@ -1,5 +1,6 @@
 package com.dili.uid.controller;
 
+import com.dili.ss.dto.DTOUtils;
 import com.dili.ss.uid.domain.BizNumber;
 import com.dili.ss.uid.service.BizNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -40,5 +42,17 @@ public class BizNumberController {
         return bizNumberService.listEasyuiPageByExample(bizNumber, true).toString();
     }
 
+    /**
+     * 查询业务号
+     * @return String
+     * @throws Exception
+     */
+    @RequestMapping(value="/getValue.action", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody String getValue(@RequestParam String type) throws Exception {
+        BizNumber condition = DTOUtils.newInstance(BizNumber.class);
+        condition.setType(type);
+        BizNumber bizNumber = bizNumberService.selectOne(condition);
+        return bizNumber == null ? null : bizNumber.getValue().toString();
+    }
 
 }

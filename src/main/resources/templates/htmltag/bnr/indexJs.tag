@@ -12,6 +12,7 @@
     let _grid = $('#grid');
     let _form = $('#_form');
     let _modal = $('#_modal');
+    let _executeModal = $('#_executeModal');
 
     /*********************变量定义区 end***************/
 
@@ -22,10 +23,22 @@
             _grid.bootstrapTable('resetView')
         });
         queryDataHandler();
+        document.addEventListener("keyup",getKey,false);
     });
     /******************************驱动执行区 end****************************/
 
     /*****************************************函数区 begin************************************/
+
+    //全局按键事件
+    function getKey(e){
+        e = e || window.event;
+        var keycode = e.which ? e.which : e.keyCode;
+        //如果按下ctrl+alt+r，弹出快捷执行窗口
+        if(e.ctrlKey && e.altKey && keycode == 82){
+            openExecuteHandler();
+        }
+    }
+
     /**
      * 打开新增窗口
      */
@@ -54,12 +67,68 @@
         }
         $('#_type').attr('readonly', true);
         $('#_dateFormat').attr('readonly', true);
-        $('#_length').attr('readonly', true);
+        // $('#_length').attr('readonly', true);
         _modal.modal('show');
         _modal.find('.modal-title').text('编号规则修改');
         let formData = $.extend({}, row);
         formData = bui.util.addKeyStartWith(bui.util.getOriginalData(formData), "_");
         bui.util.loadFormData(formData);
+    }
+
+    /**
+     * 打开编号工具对话框
+     */
+    function openExecuteHandler() {
+        //获取选中行的数据
+        let rows = _grid.bootstrapTable('getSelections');
+        if (null == rows || rows.length == 0) {
+            bs4pop.alert('请选中一条数据');
+            return;
+        }
+        $("#_executeType").val(rows[0].type);
+        let _url = "${contextPath}/bizNumber/getValue.action";
+        $.ajax({
+            type: "POST",
+            url: _url,
+            data: {"type":rows[0].type},
+            processData: true,
+            dataType: "text",
+            async: true,
+            success: function (data) {
+                $("#_currentValue").val(data);
+            },
+            error: function (a, b, c) {
+                bs4pop.alert('远程访问失败', {type: 'error'});
+            }
+        });
+        _executeModal.modal('show');
+        _executeModal.find('.modal-title').text('编号工具');
+    }
+
+    /**
+     * 获取下一编号获取
+     */
+    function getNextValueHandler() {
+        let _url = "${contextPath}/api/bizNumber";
+        $.ajax({
+            type: "POST",
+            url: _url,
+            data: {"type":$("#_executeType").val()},
+            processData: true,
+            dataType: "json",
+            async: true,
+            success: function (output) {
+                if (output.success) {
+                    $("#_nextValue").val(output.data);
+                } else {
+                    bs4pop.alert(output.message, {type: 'error'});
+                }
+            },
+            error: function (a, b, c) {
+                bui.loading.hide();
+                bs4pop.alert('远程访问失败', {type: 'error'});
+            }
+        });
     }
 
     /**
@@ -116,7 +185,6 @@
         //table选择模式是单选时可用
         let selectedRow = rows[0];
         let msg = (enable || 'true' == enable) ? '确定要启用吗？' : '确定要禁用吗？';
-
         bs4pop.confirm(msg, undefined, function (sure) {
             if(sure){
                 bui.loading.show('努力提交中，请稍候。。。');
