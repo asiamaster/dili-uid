@@ -85,6 +85,7 @@
             bs4pop.alert('请选中一条数据');
             return;
         }
+        $('#_executeform')[0].reset();
         $("#_executeType").val(rows[0].type);
         let _url = "${contextPath}/bizNumber/getValue.action";
         $.ajax({
