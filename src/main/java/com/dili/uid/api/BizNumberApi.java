@@ -40,7 +40,8 @@ public class BizNumberApi {
     @RequestMapping(method = { RequestMethod.GET, RequestMethod.POST})
     public BaseOutput<String> bizCode(@RequestParam("type") String type) {
         try {
-            return BaseOutput.success().setData(bizNumberFunction.getBizNumberByType(type));
+            String bizNumber = bizNumberFunction.getBizNumberByType(type);
+            return bizNumber == null ? BaseOutput.failure("业务号不存在") : BaseOutput.successData(bizNumber);
         } catch (Exception e) {
             return BaseOutput.failure(e.getMessage());
         }
