@@ -41,9 +41,9 @@ public class BizNumberApi {
     public BaseOutput<String> bizCode(@RequestParam("type") String type) {
         try {
             String bizNumber = bizNumberFunction.getBizNumberByType(type);
-            return bizNumber == null ? BaseOutput.failure("业务号不存在") : BaseOutput.successData(bizNumber);
+            return bizNumber == null ? BaseOutput.failure("业务类型不存在") : BaseOutput.successData(bizNumber);
         } catch (Exception e) {
-            return BaseOutput.failure(e.getMessage());
+            return BaseOutput.failure("业务号获取异常:"+e.getMessage());
         }
     }
 
