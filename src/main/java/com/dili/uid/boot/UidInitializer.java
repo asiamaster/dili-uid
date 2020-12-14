@@ -3,7 +3,7 @@ package com.dili.uid.boot;
 import com.dili.ss.dto.DTOUtils;
 import com.dili.ss.uid.constants.BizNumberConstant;
 import com.dili.ss.uid.domain.BizNumber;
-import com.dili.ss.uid.domain.BizNumberRuleDomain;
+import com.dili.ss.uid.domain.BizNumberRule;
 import com.dili.ss.uid.service.BizNumberRuleService;
 import com.dili.ss.uid.service.BizNumberService;
 import com.dili.ss.uid.util.BizNumberUtils;
@@ -28,9 +28,9 @@ public class UidInitializer implements ApplicationListener<ContextRefreshedEvent
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        BizNumberRuleDomain bizNumberRuleDomain = DTOUtils.newInstance(BizNumberRuleDomain.class);
+        BizNumberRule bizNumberRuleDomain = DTOUtils.newInstance(BizNumberRule.class);
         bizNumberRuleDomain.setIsEnable(true);
-        List<BizNumberRuleDomain> bizNumberRuleDomains = bizNumberRuleService.list(bizNumberRuleDomain);
+        List<BizNumberRule> bizNumberRuleDomains = bizNumberRuleService.list(bizNumberRuleDomain);
         bizNumberRuleDomains.stream().forEach(t -> {
             BizNumber condition = DTOUtils.newInstance(BizNumber.class);
             condition.setType(t.getType());

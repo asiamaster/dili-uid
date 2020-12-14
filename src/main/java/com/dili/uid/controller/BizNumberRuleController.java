@@ -1,7 +1,7 @@
 package com.dili.uid.controller;
 
 import com.dili.ss.domain.BaseOutput;
-import com.dili.ss.uid.domain.BizNumberRuleDomain;
+import com.dili.ss.uid.domain.BizNumberRule;
 import com.dili.ss.uid.service.BizNumberRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class BizNumberRuleController {
      * @throws Exception
      */
     @RequestMapping(value="/listPage.action", method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody String listPage(BizNumberRuleDomain bizNumberRuleDomain) throws Exception {
+    public @ResponseBody String listPage(BizNumberRule bizNumberRuleDomain) throws Exception {
         return bizNumberRuleService.listEasyuiPageByExample(bizNumberRuleDomain, true).toString();
     }
 
@@ -50,7 +50,7 @@ public class BizNumberRuleController {
      * @return BaseOutput
      */
     @RequestMapping(value="/insert.action", method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody BaseOutput insert(BizNumberRuleDomain bizNumberRuleDomain) {
+    public @ResponseBody BaseOutput insert(BizNumberRule bizNumberRuleDomain) {
         bizNumberRuleService.insertSelective(bizNumberRuleDomain);
         return BaseOutput.success("新增成功");
     }
@@ -61,7 +61,7 @@ public class BizNumberRuleController {
      * @return BaseOutput
      */
     @RequestMapping(value="/update.action", method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody BaseOutput update(BizNumberRuleDomain bizNumberRuleDomain) {
+    public @ResponseBody BaseOutput update(BizNumberRule bizNumberRuleDomain) {
         bizNumberRuleService.updateExactSimple(bizNumberRuleDomain);
         return BaseOutput.success("修改成功");
     }
