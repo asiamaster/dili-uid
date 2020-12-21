@@ -1,14 +1,13 @@
 package com.dili.uid.controller;
 
 import com.dili.ss.domain.BaseOutput;
+import com.dili.ss.uid.constants.BizNumberConstant;
 import com.dili.ss.uid.domain.BizNumberRule;
 import com.dili.ss.uid.service.BizNumberRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 由MyBatis Generator工具自动生成
@@ -88,5 +87,14 @@ public class BizNumberRuleController {
         return BaseOutput.success("操作成功");
     }
 
+    /**
+     * 清空(当前实例)缓存
+     * @return BaseOutput
+     */
+    @GetMapping(value="/clearCache.action")
+    public @ResponseBody BaseOutput clearCache(@RequestParam String type) {
+        BizNumberConstant.bizNumberCache.remove(type);
+        return BaseOutput.success("操作成功");
+    }
 
 }

@@ -133,6 +133,30 @@
     }
 
     /**
+     * 清空缓存
+     */
+    function clearCacheHandler() {
+        $.ajax({
+            type: "GET",
+            url: "${contextPath}/bizNumberRule/clearCache.action?type="+$("#_executeType").val(),
+            processData: true,
+            dataType: "json",
+            async: true,
+            success: function (output) {
+                if (output.success) {
+                    bs4pop.alert(output.message, {type: 'info'});
+                } else {
+                    bs4pop.alert(output.message, {type: 'error'});
+                }
+            },
+            error: function (a, b, c) {
+                bui.loading.hide();
+                bs4pop.alert('远程访问失败', {type: 'error'});
+            }
+        });
+    }
+
+    /**
      *  保存及更新表单数据
      */
     function saveOrUpdateHandler() {
