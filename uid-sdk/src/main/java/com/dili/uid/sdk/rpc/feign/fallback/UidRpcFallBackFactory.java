@@ -1,4 +1,4 @@
-package com.dili.bpmc.sdk.rpc.feign.fallback;
+package com.dili.uid.sdk.rpc.feign.fallback;
 
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;

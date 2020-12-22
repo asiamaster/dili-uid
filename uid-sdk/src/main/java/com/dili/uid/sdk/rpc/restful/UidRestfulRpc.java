@@ -1,4 +1,4 @@
-package com.dili.bpmc.sdk.rpc.restful;
+package com.dili.uid.sdk.rpc.restful;
 
 import com.dili.ss.domain.BaseOutput;
 import com.dili.ss.retrofitful.annotation.GET;

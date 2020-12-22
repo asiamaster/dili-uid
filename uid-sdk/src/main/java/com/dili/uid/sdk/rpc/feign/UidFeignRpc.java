@@ -1,6 +1,6 @@
-package com.dili.bpmc.sdk.rpc.feign;
+package com.dili.uid.sdk.rpc.feign;
 
-import com.dili.bpmc.sdk.rpc.feign.fallback.UidRpcFallBackFactory;
+import com.dili.uid.sdk.rpc.feign.fallback.UidRpcFallBackFactory;
 import com.dili.ss.domain.BaseOutput;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

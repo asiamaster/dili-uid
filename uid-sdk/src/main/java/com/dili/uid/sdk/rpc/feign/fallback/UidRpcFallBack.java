@@ -1,6 +1,6 @@
-package com.dili.bpmc.sdk.rpc.feign.fallback;
+package com.dili.uid.sdk.rpc.feign.fallback;
 
-import com.dili.bpmc.sdk.rpc.feign.UidFeignRpc;
+import com.dili.uid.sdk.rpc.feign.UidFeignRpc;
 import com.dili.ss.constant.ResultCode;
 import com.dili.ss.domain.BaseOutput;
 
