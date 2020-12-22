@@ -88,22 +88,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>com.dili</groupId>
-            <artifactId>uap-sdk</artifactId>
-            <version>2.11.0-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>ss-beetl</artifactId>
-                    <groupId>com.dili</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>ss-redis</artifactId>
-                    <groupId>com.dili</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+
         <dependency>
             <groupId>com.dili</groupId>
             <artifactId>ss-processor</artifactId>
