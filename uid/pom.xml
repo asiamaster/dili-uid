@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.dili</groupId>
+	<artifactId>uid</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<description>uid</description>
+	<name>uid</name>
+	<packaging>jar</packaging>
+
+	<!-- 父工程定义 -->
+	<parent>
+		<artifactId>dili-uid</artifactId>
+		<groupId>com.dili</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>13</java.version>
+		<!--  XML生成路径  -->
+		<targetJavaProject>${basedir}/src/main/java</targetJavaProject>
+		<templateRootDir>${basedir}/mbg-templates</templateRootDir>
+		<projectdir>${basedir}</projectdir>
+		<targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
+		<targetXMLPackage>mapper</targetXMLPackage>
+		<targetMapperPackage>com.dili.uid.mapper</targetMapperPackage>
+		<targetModelPackage>com.dili.uid.domain</targetModelPackage>
+		<targetServicePackage>com.dili.uid.service</targetServicePackage>
+		<targetControllerPackage>com.dili.uid.controller</targetControllerPackage>
+	</properties>
+
+
+	<build>
+		<finalName>dili-uid</finalName>
+		<!-- 资源文件过滤 -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.3.2.RELEASE</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<!-- 编译JDK版本 -->
+				<configuration>
+					<source>13</source>
+					<target>13</target>
+					<encoding>UTF-8</encoding>
+					<parameters>true</parameters>
+					<compilerArgument>-proc:none</compilerArgument>
+					<compilerArgs>
+						<arg>--add-exports=jdk.compiler/com.sun.tools.javac=ALL-UNNAMED</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.7</version>
+				<configuration>
+					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+					<overwrite>true</overwrite>
+					<verbose>true</verbose>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.dili</groupId>
+						<artifactId>ss-mbg</artifactId>
+						<version>${sharp-sword.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
+		</dependency>
+
+		<!-- 利刃框架引入 -->
+		<dependency>
+			<groupId>com.dili</groupId>
+			<artifactId>ss-uid</artifactId>
+			<version>${sharp-sword.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.dili</groupId>
+			<artifactId>ss-mbg</artifactId>
+			<version>${sharp-sword.version}</version>
+		</dependency>
+		<!-- if you enable json support in spring mvc. -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+			<version>2.2.3.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.alibaba</groupId>
+					<artifactId>fastjson</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+			<version>2.2.3.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>2.2.5.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel -->
+		<!-- 哨兵依赖 -->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+			<version>2.2.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-datasource-nacos</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+		<!-- 内部包 -->
+		<dependency>
+			<groupId>com.dili</groupId>
+			<artifactId>uap-sdk</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.dili</groupId>
+			<artifactId>ss-processor</artifactId>
+			<version>${sharp-sword.version}</version>
+		</dependency>
+
+		<!-- 公共信息 -->
+		<dependency>
+			<groupId>com.dili</groupId>
+			<artifactId>commons-web</artifactId>
+			<version>1.3.4-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+
+
+</project>
